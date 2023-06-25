@@ -1,0 +1,11 @@
+Model Information:
+* title:	Showroom - 40 cm
+* source:	https://sketchfab.com/3d-models/showroom-40-cm-220b9dcb376c43b1a76a194cabadcdde
+* author:	Sflex (https://sketchfab.com/Sflex)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Showroom - 40 cm" (https://sketchfab.com/3d-models/showroom-40-cm-220b9dcb376c43b1a76a194cabadcdde) by Sflex (https://sketchfab.com/Sflex) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
