@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioClip clip1; // Reference to first audio clip
-    public AudioClip clip2; // Reference to second audio clip
+    public AudioClip clip1; // Reference to your first audio clip
+    public AudioClip clip2; // Reference to your second audio clip
+    public float delayBeforePlaying = 1f; // Delay in seconds before playing the first clip
+    public float playbackSpeed = 0.5f; // The speed at which the audio clips should play (0.5 = half speed)
+
     private AudioSource audioSource;
 
     private void Start()
@@ -15,20 +18,22 @@ public class AudioController : MonoBehaviour
 
     private void PlaySequentially()
     {
-        // Play the first audio clip
-        audioSource.clip = clip1;
-        audioSource.Play();
-
-        // Wait until the first clip finishes playing
-        StartCoroutine(WaitForClipToFinish(clip1.length));
+        StartCoroutine(PlayDelayedClip(clip1, delayBeforePlaying));
     }
 
-    private IEnumerator WaitForClipToFinish(float duration)
+    private IEnumerator PlayDelayedClip(AudioClip clip, float delay)
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(delay);
+
+        audioSource.clip = clip;
+        audioSource.pitch = playbackSpeed;
+        audioSource.Play();
+
+        yield return new WaitForSeconds(clip.length / playbackSpeed);
 
         // Play the second audio clip
         audioSource.clip = clip2;
+        audioSource.pitch = playbackSpeed;
         audioSource.Play();
     }
 }
