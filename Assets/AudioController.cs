@@ -5,8 +5,9 @@ public class AudioController : MonoBehaviour
 {
     public AudioClip clip1; // Reference to your first audio clip
     public AudioClip clip2; // Reference to your second audio clip
-    public float delayBeforePlaying = 1f; // Delay in seconds before playing the first clip
-    public float playbackSpeed = 0.5f; // The speed at which the audio clips should play (0.5 = half speed)
+    public AudioClip clip3; // Reference to your third audio clip
+    public float delayBeforePlayingFirst = 1f; // Delay in seconds before playing the first clip
+    public float delayBeforePlayingThird = 3f; // Delay in seconds before playing the third clip
 
     private AudioSource audioSource;
 
@@ -18,7 +19,7 @@ public class AudioController : MonoBehaviour
 
     private void PlaySequentially()
     {
-        StartCoroutine(PlayDelayedClip(clip1, delayBeforePlaying));
+        StartCoroutine(PlayDelayedClip(clip1, delayBeforePlayingFirst));
     }
 
     private IEnumerator PlayDelayedClip(AudioClip clip, float delay)
@@ -26,14 +27,26 @@ public class AudioController : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         audioSource.clip = clip;
-        audioSource.pitch = playbackSpeed;
         audioSource.Play();
 
-        yield return new WaitForSeconds(clip.length / playbackSpeed);
+        yield return new WaitForSeconds(clip.length);
 
-        // Play the second audio clip
-        audioSource.clip = clip2;
-        audioSource.pitch = playbackSpeed;
-        audioSource.Play();
+        if (clip == clip1)
+        {
+            // Play the second audio clip
+            audioSource.clip = clip2;
+            audioSource.Play();
+
+            yield return new WaitForSeconds(clip2.length);
+
+            // Play the third audio clip
+            StartCoroutine(PlayDelayedClip(clip3, delayBeforePlayingThird));
+        }
+        else if (clip == clip3)
+        {
+            // Play the third audio clip
+            audioSource.clip = clip3;
+            audioSource.Play();
+        }
     }
 }
